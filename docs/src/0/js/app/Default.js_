@@ -2,6 +2,44 @@ define(function() {
     return class Default {
 	get Markdown() {
 	    return `# Markdownタイトル
+
+* A
+* B
+
+A|B
+-|-
+1|2
+3|4
+
+C|D
+-|-
+A|* A1  
+* A2
+B|* B1  
+* B2
+
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+## new line
+
+スペース二つで\`<br/>\`  改行された？
+
+ふつうに1行の改行で\`<br/>\`されると思うが。
+改行された？
+
+行末にスペース二つ入れて1行改行すると、  
+改行された？
+
+2行の改行で\`<p>\`の終わりを示す。
+
+新しい段落（パラグラフ）？
+
+## code
+
 ### shell
 
 \`\`\`shell:main.sh
