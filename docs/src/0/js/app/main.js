@@ -3,33 +3,38 @@
 //});
 define(function(require, exports, module) {
     /*
-    let md = null;
+    const md = null;
     try {
 	md = require('text!txt/default.md');
     } catch(e) {
-	let Default = require('js/app/Default');
-	let d = new Default();
+	const Default = require('js/app/Default');
+	const d = new Default();
 	md = d.Markdown;
     }
     */
-    let Default = require('js/app/Default');
-    let d = new Default();
-    md = d.Markdown;
-    let CodeLanguage = require('js/app/CodeLanguage');
-    let cl = new CodeLanguage();
+    const CssSelectBox = require('js/app/ui/CssSelectBox');
+    CssSelectBox.AppendTo(document.body);
+    const Default = require('js/app/Default');
+    const d = new Default();
+    let md = d.Markdown;
+    const CodeLanguage = require('js/app/CodeLanguage');
+    const cl = new CodeLanguage();
     langs = cl.Get(md);
     console.log(langs);
 
-    let $ = require('jquery');
-    let marked = require('marked');
-    let CssLoader = require('js/util/CssLoader');
+    const $ = require('jquery');
+    const marked = require('marked');
+    const CssLoader = require('js/util/CssLoader');
     CssLoader.Load('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css');
-    let markedSetup = require('js/ext/marked/Setup');
+    const markedSetup = require('js/ext/marked/Setup');
     markedSetup.Setup();
     console.log('パース開始');
-    html = marked(md);
+    let html = marked(md);
     console.log('パース完了');
-    $('body').html(html);
-    let sub = require('js/app/sub');
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    document.body.appendChild(doc.body);
+    //$('body').html($('body').html() + html);
+    const sub = require('js/app/sub');
     sub.print(md);
 });
