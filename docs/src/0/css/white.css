@@ -1,4 +1,4 @@
-body {
+body, input, select, textarea {
     background-color: #FFFFFF;
     color: #000000;
 }
