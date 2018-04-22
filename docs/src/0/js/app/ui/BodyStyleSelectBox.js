@@ -25,6 +25,7 @@ define(function(require, exports, module) {
 	}
 	static _MakeHtmlString() {
 	    const cssFiles = [
+		'none',
 		'black',
 		'white',
 	    ];

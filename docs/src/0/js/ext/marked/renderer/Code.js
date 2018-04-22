@@ -31,7 +31,7 @@ define(function(require, exports, module) {
     // pre.code タグ作成
     Code._MakePreCodeTag = function(lang, fileName, code) {
 	console.log('lang:', lang, 'fileName:', fileName);
-	return '<pre>' + Code._FileNameTag(fileName)+ '<code class="'+lang+'">' + hljs.highlightAuto(code).value + '</code></pre>';
+	return '<pre>' + Code._FileNameTag(fileName)+ '<code class="hljs '+lang+'">' + hljs.highlightAuto(code).value + '</code></pre>';
     }
     // ファイル名表示用タグ
     Code._FileNameTag = function(fileName) {
