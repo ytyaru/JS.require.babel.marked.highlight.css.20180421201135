@@ -12,8 +12,15 @@ define(function(require, exports, module) {
 	md = d.Markdown;
     }
     */
-    const CssSelectBox = require('js/app/ui/CssSelectBox');
-    CssSelectBox.AppendTo(document.body);
+    const BodyStyleSelectBox = require('js/app/ui/BodyStyleSelectBox');
+    BodyStyleSelectBox.AppendTo(document.body);
+    const CodeStyleSelectBox = require('js/app/ui/CodeStyleSelectBox');
+    CodeStyleSelectBox.AppendTo(document.body);
+    /*
+    document.getElementById(CodeStyleSelectBox.Id).addEventListener('change', () => {
+	const LoadMd = require('js/app/LoadMd');
+    });
+    */
     const Default = require('js/app/Default');
     const d = new Default();
     let md = d.Markdown;

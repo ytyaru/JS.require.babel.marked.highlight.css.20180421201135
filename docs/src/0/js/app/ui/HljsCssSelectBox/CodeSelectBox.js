@@ -1,17 +1,18 @@
 define(function(require, exports, module) {
     const XmlGen = require('js/util/XmlGen');
-    return class CssSelectBox {
-	static get Id() { return 'BodyStyleSelectBox'; }
-	static get LinkId() { return 'BodyStyle'; }
-	static get Element() { return document.getElementById(CssSelectBox.Id); }
+    const Highlight = require('js/ext/highlight/Highlight');
+    return class CodeStyleSelectBox {
+	static get Id() { return 'CodeStyleSelectBox'; }
+	static get LinkId() { return 'CodeStyle'; }
+	static get Element() { return document.getElementById(CodeStyleSelectBox.Id); }
 	static AppendTo(parent) {
-	    const dom = CssSelectBox._Create();
+	    const dom = CodeStyleSelectBox._Create();
 	    parent.appendChild(dom);
-	    CssSelectBox._SetEvent(dom);
+	    CodeStyleSelectBox._SetEvent(dom);
 	    dom.focus();
 	}
 	static _Create() {
-	    const html = CssSelectBox._MakeHtmlString();
+	    const html = CodeStyleSelectBox._MakeHtmlString();
 	    console.log(html);
 	    const parser = new DOMParser();
 	    const dom = parser.parseFromString(html, "text/html");
@@ -24,22 +25,18 @@ define(function(require, exports, module) {
 	    return domSelect ;
 	}
 	static _MakeHtmlString() {
-	    const cssFiles = [
-		'black',
-		'white',
-	    ];
+	    h = Highlight();
 	    let options = [];
-	    for (let v of cssFiles) {
-		options.push(XmlGen.Element('option', {'value': CssSelectBox._CssPath(v)}, v));
+	    for (let v of h.Styles.FileNames) {
+		options.push(XmlGen.Element('option', {'value': h.Styles.Path(v)}, v));
 	    }
-	    return XmlGen.Element('select', {'id': CssSelectBox.Id}, options.join(''));
+	    return XmlGen.Element('select', {'id': CodeStyleSelectBox.Id}, options.join(''));
 	}
-	static _CssPath(name) { return `./css/${name}.css`; }
 	// イベントの設定はdocumentにappendしてからでないと動かない
 	static _SetEvent(dom) {
 	    dom.onchange = e => {
 		console.log(e.target.value);
-		document.getElementById(CssSelectBox.LinkId).href = e.target.value;
+		document.getElementById(CodeStyleSelectBox.LinkId).href = e.target.value;
 	    };
 	}
     };
